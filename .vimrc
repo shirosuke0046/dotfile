@@ -158,6 +158,10 @@ inoremap ''    ''<Left>
 inoremap ""    ""<Left>
 inoremap ``    ``<Left>
 
+inoremap (<CR>    (<CR><CR>)<Up>
+inoremap {<CR>    {<CR><CR>}<Up>
+inoremap [<CR>    [<CR><CR>]<Up>
+
 " 最低限
 filetype plugin indent on
 syntax enable

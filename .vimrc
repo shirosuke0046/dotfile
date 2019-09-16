@@ -1,4 +1,4 @@
-" 初期設定
+" Getting Start dein
 " mkdir -p ~/.config/nvim/dein
 " curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 " sh ./installer.sh ~/.config/nvim/dein
@@ -36,8 +36,11 @@ if dein#load_state('~/.config/nvim/dein')
   " 対応する括弧の変更ができる
   call dein#add('tpope/vim-surround')
 
+  " .リピートを拡張`
+  call dein#add('tpope/vim-repeat')
+
   " :NERDTreeToggleでファイルツリーの表示プラグイン
-  call dein#add('scrooloose/nerdtree')
+  " call dein#add('scrooloose/nerdtree')
 
   call dein#end()
   call dein#save_state()

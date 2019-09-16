@@ -40,7 +40,7 @@ if dein#load_state('~/.config/nvim/dein')
   call dein#add('tpope/vim-repeat')
 
   " :NERDTreeToggleでファイルツリーの表示プラグイン
-  " call dein#add('scrooloose/nerdtree')
+  call dein#add('scrooloose/nerdtree')
 
   call dein#end()
   call dein#save_state()
@@ -78,8 +78,9 @@ endif
 "" Plugin設定
 " deoplete有効化
 let g:deoplete#enable_at_startup = 1
-" NERDTreeのキーマップ@Yggdroot/indentLine
+" NERDTree
 nnoremap <silent><C-e>    :NERDTreeToggle<CR>
+let g:NERDTreeLimitedSyntax = 1
 
 "" キーマッピング
 " Y を行末までヤンクに再マッピング

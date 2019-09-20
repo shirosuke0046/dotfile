@@ -1,87 +1,21 @@
-" Getting Start dein
-" mkdir -p ~/.config/nvim/dein
-" curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-" sh ./installer.sh ~/.config/nvim/dein
-" rm ./installer.sh
-" mkdir -p ~/.config/nvim/after/ftplugin
+" ---------- Getting Start 'vim-plug' ----------
+"" Vim
+" $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"
+"" Neovim
+" $ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" ------------------------------
 
-" ---------- dein script Start ----------
-if &compatible
-  set nocompatible
-endif
-" Add the dein installation directory into runtimepath
-set runtimepath+=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
+call plug#begin()
 
-if dein#load_state('~/.config/nvim/dein')
-  call dein#begin('~/.config/nvim/dein')
- 
-  " dein
-  call dein#add('~/.config/nvim/dein')
-  call dein#add('Shougo/deoplete.nvim')
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
-
-  " deosnippet
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-
-  " インデントラインを表示してくれる
-  call dein#add('Yggdroot/indentLine')
-
-  " gccでコメント/アウト
-  call dein#add('tpope/vim-commentary')
-
-  " 対応する括弧の変更ができる
-  call dein#add('tpope/vim-surround')
-
-  " .リピートを拡張`
-  call dein#add('tpope/vim-repeat')
-
-  " :NERDTreeToggleでファイルツリーの表示プラグイン
-  call dein#add('scrooloose/nerdtree')
-
-  call dein#end()
-  call dein#save_state()
-endif
-
-if dein#check_install()
-  call dein#install()
-endif
-" ---------- dein script End ---------------
-
-" ---------- deosnippet setting Start ---------------
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
- imap <C-k>     <Plug>(neosnippet_expand_or_jump)
- smap <C-k>     <Plug>(neosnippet_expand_or_jump)
- xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-" ---------- deosnippet setting End ---------------
+Plug 'Yggdroot/indentLine'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+call plug#end()
 
 " ---------- My Settings ----------
-
-"" Plugin設定
-" deoplete有効化
-let g:deoplete#enable_at_startup = 1
-" NERDTree
-nnoremap <silent><C-e>    :NERDTreeToggle<CR>
-let g:NERDTreeLimitedSyntax = 1
-
 "" キーマッピング
 " Y を行末までヤンクに再マッピング
 nnoremap Y    y$
@@ -101,11 +35,38 @@ if has('nvim')
   :command Vte    :10vsplit|terminal
 endif
 " <ESC>でcommand modeにする
-tnoremap <silent> <ESC>    <C-\><C-n>
+tnoremap <silent><ESC>    <C-\><C-n>
+" ,による逆方向検索を再マップ
+nnoremap \    ,
+
+"" Leader設定
+" <Space>をLeaderキーに設定
+let mapleader = "\<Space>"
+" 行頭行末を押しやすく
+nnoremap <Leader><Leader>h    ^
+nnoremap <Leader><Leader>l    $
+" 半画面移動を押しやすく
+nnoremap <Leader>K    <C-u>zz
+nnoremap <Leader>J    <C-d>zz
+" ウィンドウ関連
+nmap <Leader>w    [window]
+nnoremap [window]h    <C-w>h
+nnoremap [window]j    <C-w>j
+nnoremap [window]k    <C-w>k
+nnoremap [window]l    <C-w>l
+nnoremap [window]s    :split<CR>
+nnoremap [window]v    :vsplit<CR>
+" タブ関連
+nmap <Leader>t    [tab]
+nnoremap [tab]n    :tabnew<CR>
+nnoremap [tab]l    gt
+nnoremap [tab]h    gT
 
 "" 全体設定
+" エンコーディング設定
+set encoding=utf-8
 " 行番号を表示
-set number
+" set number
 " 入力中のコマンドをステータスに表示する
 set showcmd
 " ステータスラインを常に表示
@@ -128,7 +89,7 @@ set shiftwidth=4
 set softtabstop=4
 " 半角スペースを<Tab>に変換しない
 set expandtab
-" 不可視文字を可視化(<Tab>が「▸-」と表示される)
+" 不可視文字を可視化(<Tab>が「▸---」と表示される)
 set list listchars=tab:\▸\-
 " 自動インデント設定
 set smartindent
@@ -149,7 +110,8 @@ set hlsearch
 " ESC連打でハイライト解除
 nnoremap <Esc><Esc>    :nohlsearch<CR><Esc>
 
-"" 括弧入力で中に移動
+"" 括弧入力補完
+" 括弧入力で中に移動
 inoremap ()    ()<Left>
 inoremap {}    {}<Left>
 inoremap []    []<Left>
@@ -157,11 +119,11 @@ inoremap <>    <><Left>
 inoremap ''    ''<Left>
 inoremap ""    ""<Left>
 inoremap ``    ``<Left>
+" 左括弧<ENTER>で閉じ括弧補完
+inoremap (<CR>    (<CR>)<Left><CR><up><Tab>
+inoremap {<CR>    {<CR>}<Left><CR><up><Tab>
+inoremap [<CR>    [<CR>]<Left><CR><up><Tab>
 
-inoremap (<CR>    (<CR><CR>)<Up>
-inoremap {<CR>    {<CR><CR>}<Up>
-inoremap [<CR>    [<CR><CR>]<Up>
-
-" 最低限
+"" おまじない
 filetype plugin indent on
 syntax enable

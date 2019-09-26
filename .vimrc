@@ -7,8 +7,7 @@
 " ------------------------------
 
 call plug#begin()
-
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -66,7 +65,7 @@ nnoremap [tab]h    gT
 " エンコーディング設定
 set encoding=utf-8
 " 行番号を表示
-" set number
+set number
 " 入力中のコマンドをステータスに表示する
 set showcmd
 " ステータスラインを常に表示

@@ -1,18 +1,37 @@
 " ---------- Getting Start 'vim-plug' ----------
-"" Vim
+"" For Vim
 " $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"
-"" Neovim
+"" For Neovim
 " $ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" And run :PlugInstall
 " ------------------------------
 
+" ---------- Plugin ----------
+"" Active
 call plug#begin()
-" Plug 'Yggdroot/indentLine'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'junegunn/seoul256.vim'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
+
+"" Settings
+" seoul256
+let g:seoul256_background = 235
+colo seoul256
+
+" vim-airline
+let g:airline_theme='fruit_punch'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+" vim-go
+let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 1
 
 " ---------- My Settings ----------
 "" キーマッピング
@@ -42,8 +61,8 @@ nnoremap \    ,
 " <Space>をLeaderキーに設定
 let mapleader = "\<Space>"
 " 行頭行末を押しやすく
-nnoremap <Leader><Leader>h    ^
-nnoremap <Leader><Leader>l    $
+nnoremap <Leader>h    ^
+nnoremap <Leader>l    $
 " 半画面移動を押しやすく
 nnoremap <Leader>K    <C-u>zz
 nnoremap <Leader>J    <C-d>zz
@@ -64,12 +83,14 @@ nnoremap [tab]h    gT
 "" 全体設定
 " エンコーディング設定
 set encoding=utf-8
+" ファイル読み込み時のエンコーディング
+set fileencodings=ucs-bombs,utf-8,cp932
 " 行番号を表示
 set number
 " 入力中のコマンドをステータスに表示する
 set showcmd
-" ステータスラインを常に表示
-set laststatus=2
+ 
+" set hidden
 " 下方向にウィンドウ分割する
 set splitbelow
 " 右方向にウィンドウ分割する
@@ -90,10 +111,10 @@ set softtabstop=4
 set expandtab
 " 不可視文字を可視化(<Tab>が「▸---」と表示される)
 set list listchars=tab:\▸\-
-" 自動インデント設定
-set smartindent
 " 現在行のインデントを維持する
 set autoindent
+" 自動インデント設定
+set smartindent
 
 "" 検索系
 " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
@@ -126,3 +147,4 @@ inoremap [<CR>    [<CR>]<Left><CR><up><Tab>
 "" おまじない
 filetype plugin indent on
 syntax enable
+set nomodeline

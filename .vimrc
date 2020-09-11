@@ -144,6 +144,19 @@ inoremap (<CR>    (<CR>)<Left><CR><up><Tab>
 inoremap {<CR>    {<CR>}<Left><CR><up><Tab>
 inoremap [<CR>    [<CR>]<Left><CR><up><Tab>
 
+if &term =~ '^xterm'
+  " normal mode
+  let &t_EI .= "\<Esc>[0 q"
+  " insert mode
+  let &t_SI .= "\<Esc>[6 q"
+endif
+
+augroup myCmds
+  au!
+  autocmd VimEnter * silent !echo -ne "\e[0 q"
+  autocmd VimLeave * silent !echo -ne "\e[6 q"
+augroup END
+
 "" おまじない
 filetype plugin indent on
 syntax enable

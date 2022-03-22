@@ -3,7 +3,7 @@
 PREFIX=$HOME/.config
 mkdir -p $PREFIX || exit
 
-DOTDIR=$PREFIX/dotfiles
+DOT_DIR=$PREFIX/dotfiles
 
 if [ -d $DOT_DIR ]; then
     git clone https://github.com/shirosuke0046/dotfiles.git $DOT_DIR

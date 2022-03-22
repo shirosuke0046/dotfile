@@ -12,6 +12,6 @@ else
 fi
 
 # vim
-curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
+curl -sfLo $HOME/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -sf $DOT_DIR/.vimrc $HOME/.vimrc

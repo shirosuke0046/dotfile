@@ -5,12 +5,10 @@ mkdir -p $PREFIX || exit
 
 DOT_DIR=$PREFIX/dotfiles
 
-if [ -d $DOT_DIR ]; then
+if [ ! -d $DOT_DIR ]; then
     git clone https://github.com/shirosuke0046/dotfiles.git $DOT_DIR
 else
-    pushd $DOT_DIR
-    git pull
-    popd
+    cd $DOT_DIR && git pull
 fi
 
 # vim
